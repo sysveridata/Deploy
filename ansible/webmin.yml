@@ -53,8 +53,14 @@
     command: firewall-cmd --permanent --new-service=webmin
   - name: Add port to Webmin service for FirewallD
     command: firewall-cmd --permanent --service=webmin --add-port=10000/tcp
+  - name: Which is a zone of firewallD?
+    shell: firewall-cmd --get-active-zone | head -n1
+    register: zone
+  #- debug: msg="{{zone.stdout}}"
   - name: Enable Webmin service in FirewallD
-    firewalld:
-      service: webmin
-      permanent: true
-      state: enabled
+    command: firewall-cmd --permanent --zone="{{zone.stdout}}" --add-service=webmin
+  #- name: Enable Webmin service in FirewallD
+  #     firewalld:
+  #     service: webmin
+  #     permanent: true
+  #     state: enabled

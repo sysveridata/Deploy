@@ -12,3 +12,5 @@ all:
           ansible_host: 192.168.20.150
         192.168.20.25:  # deploy00
           ansible_host: 192.168.20.25
+        192.168.100.99:  # VCOMM-DEV-LNX
+          ansible_host: 192.168.100.99
